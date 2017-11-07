@@ -52,6 +52,8 @@ function EditCode(opts) {
 
         // Add opts in the argument list
         var args = [event, change, opts];
+        var isMac = window.navigator.platform.includes('Mac');
+        var property = isMac ? 'metaKey' : 'ctrlKey';
 
         // Select all the code in the block (Mod+a)
         if (event.key === 'a' && event.metaKey && opts.selectAll) {
@@ -69,7 +71,7 @@ function EditCode(opts) {
                 }
 
                 // User is pressing Mod+Enter
-                else if (event.key == KEY_ENTER && event.metaKey && opts.exitBlockType) {
+                else if (event.key == KEY_ENTER && event[property] && opts.exitBlockType) {
                         return onModEnter.apply(undefined, args);
                     }
 
